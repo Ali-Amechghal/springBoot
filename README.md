@@ -337,7 +337,7 @@ loads the Spring application context using SpringApplication the same way
 and with the same treatment it would get if it was being loaded in a production application.
 This includes the loading of external properties and Spring Boot logging.
 
-	==> 4.2 Testing web applications
+### 4.2 Testing web applications
 
 
 	■ Spring Mock MVC enables controllers to be tested in a mocked approximation
@@ -441,7 +441,7 @@ the chosen port.
 				browser.findElementByCssSelector("dd.bookDescription");
 				assertEquals("DESCRIPTION", dt.getText());
 			}..}
-```
+``
 ### Spring Boot Developer Tools
 
 	■ Automatic restart—Restarts a running application when files are changed in
