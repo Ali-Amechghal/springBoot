@@ -49,7 +49,7 @@ Spring Boot Notes , Tips &amp; Tricks
 
     	==> Conditionl
     		Creating a condition class:
-    ```java		
+    ```java	
     	public class JdbcTemplateCondition implements Condition {
     		@Override
     		public boolean matches (ConditionContext ctxt, AnnotatedTypeMetaData m){
@@ -71,7 +71,7 @@ Spring Boot Notes , Tips &amp; Tricks
     		...
     	}
     ```
-    
+
     	Spring Provide a ready to use conditional Annotation
     		@ConditionalOnBean : if bean exists
     		@ConditionalOnMissingBean ...
