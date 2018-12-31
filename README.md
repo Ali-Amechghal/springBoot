@@ -441,7 +441,7 @@ the chosen port.
 				browser.findElementByCssSelector("dd.bookDescription");
 				assertEquals("DESCRIPTION", dt.getText());
 			}..}
-``
+```
 ### Spring Boot Developer Tools
 
 	■ Automatic restart—Restarts a running application when files are changed in
