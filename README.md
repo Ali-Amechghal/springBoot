@@ -64,13 +64,13 @@ Spring Boot Notes , Tips &amp; Tricks
     	}
     ```
     		Using a condition :
-    ```java
+```java
     	Create MySerice only if JdbcTemplate its present in the classpath
     	@Conditional(JdbcTemplateCondition.class)
     	public MyService myService(){
     		...
     	}
-    ```
+```
 
     	Spring Provide a ready to use conditional Annotation
     		@ConditionalOnBean : if bean exists
