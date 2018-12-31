@@ -452,6 +452,7 @@ the chosen port.
 			(such as those in third-party JAR files) will be loaded into a base classloader, whereas
 			application code that is being worked on will be loaded into a separate restart classloader.
 			When changes are detected, only the restart classloader is restarted.
+
 ```yaml
 			spring:
 			  devtools:
