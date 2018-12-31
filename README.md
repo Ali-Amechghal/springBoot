@@ -85,12 +85,13 @@ For the most part, the @ConditionalOnMissingBean annotation described in
 is what makes it possible to override auto-configuration. The JdbcTemplate
 bean defined in Spring Boot’s DataSourceAutoConfiguration is a very simple example
 of how @ConditionalOnMissingBean works:
+```java
 	@Bean
 	@ConditionalOnMissingBean(JdbcOperations.class)
 	public JdbcTemplate jdbcTemplate() {
 	return new JdbcTemplate(this.dataSource);
 	}
-
+```
 	(the
 interface that JdbcTemplate implements).
 
@@ -143,7 +144,7 @@ of four locations:
 side by side at the same level of precedence, properties in application.yml will override
 those in application.properties.
 
-	=> CONFIGURING THE EMBEDDED SERVER
+### CONFIGURING THE EMBEDDED SERVER
 
 	server:
 	   port: 8000
@@ -160,7 +161,7 @@ classpath: URL to reference it.
 		key-store-password: letmein
 		key-password: letmein
 
-	### CONFIGURING LOGGING
+### CONFIGURING LOGGING
 
 	By default, Spring Boot configures logging via Logback
 	if you decide that you’d rather use Log4j or Log4j2, you’ll need to change your dependencies to include the appropriate starter
@@ -257,7 +258,7 @@ public class ReadingListController {...}
 		NB : amazon.associateId is equivalent to both amazon.associate_id and amazon.associate-id
 		NB : if you dont use any autoconfig you should add @EnableConfigurationProperties to use @ConfigurationProperties
 
-	==> 3.2.3 Configuring with profiles
+## 3.2.3 Configuring with profiles
 
 	Profilesare a type of conditional configuration where different beans or configuration classes
 are used or ignored based on what profiles are active at runtime. For instance, suppose that the security configuration we created
@@ -269,7 +270,7 @@ are used or ignored based on what profiles are active at runtime. For instance, 
 
 		spring.profiles.active=production
 
-		==> WORKING WITH PROFILE-SPECIFIC PROPERTIES FILES
+### WORKING WITH PROFILE-SPECIFIC PROPERTIES FILES
 
 		pattern “application-{profile}.properties”. OR “application-{profile}.yml” , but un yaml you can use profile config in one file
 
@@ -346,7 +347,7 @@ This includes the loading of external properties and Spring Boot logging.
 		==> server-based tests are closer to the real-world environment that they’ll be running in when deployed to production
 
 
-			==> 4.2.1 Mocking Spring MVC
+### 4.2.1 Mocking Spring MVC
 
 
 			mockMvc.perform(post("/readingList")
@@ -358,7 +359,7 @@ This includes the loading of external properties and Spring Boot logging.
 				.andExpect(status().is3xxRedirection())
 				.andExpect(header().string("Location", "/readingList"));
 
-		==> 4.3 Testing a running application
+### 4.3 Testing a running application
 				
 		@WebIntegrationTest : start embedded server and run tests against it
 		@WebIntegrationTest(value={"server.port=0"})
@@ -390,7 +391,7 @@ the chosen port.
 						}
 					}
 				}
-		==> 4.3.2 Testing HTML pages with Selenium
+### 4.3.2 Testing HTML pages with Selenium
 		Add dependecy : testCompile("org.seleniumhq.selenium:selenium-java:2.45.0")
 
 		@RunWith(SpringJUnit4ClassRunner.class)
@@ -436,7 +437,7 @@ the chosen port.
 				assertEquals("DESCRIPTION", dt.getText());
 			}..}
 
-	==> Spring Boot Developer Tools
+### Spring Boot Developer Tools
 
 	■ Automatic restart—Restarts a running application when files are changed in
 		the classpath
@@ -503,20 +504,20 @@ the chosen port.
 			<artifactId>spring-boot-devtools</artifactId>
 		</dependency>
 
-		==> when the developer tools are active, the following properties are set to false:
+  when the developer tools are active, the following properties are set to false:
 			■ spring.thymeleaf.cache
 			■ spring.freemarker.cache
 			■ spring.velocity.cache
 			■ spring.mustache.cache
 			■ spring.groovy.template.cache
 
-		==> Globally configuring developer tools
+### Globally configuring developer tools
 
 	Create a file named .spring-boot-devtools.properties in your home directory and add to it setting ...
 			spring.devtools.restart.trigger-file=.trigger
 			spring.devtools.livereload.enabled=false
 
-	==> Taking a peek inside with the Actuator
+### Taking a peek inside with the Actuator
 
 	<dependency>
 		<groupId>org.springframework.boot</groupId>
