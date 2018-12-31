@@ -32,6 +32,7 @@ Spring Boot Notes , Tips &amp; Tricks
 
 ### Deps
     	You can exclude transitive deps and add your specific versions
+```xml
     		<dependency>
     			<groupId></>
     			<artifactId></>
@@ -41,6 +42,7 @@ Spring Boot Notes , Tips &amp; Tricks
     				</exclison>
     			</exclusions>
     		</dependency>
+```
 
 ### AutoConfiguration
     	Springboot autoconfiguration its a runtime process (in the application startup)
@@ -92,8 +94,7 @@ of how @ConditionalOnMissingBean works:
 	return new JdbcTemplate(this.dataSource);
 	}
 ```
-	(the
-interface that JdbcTemplate implements).
+	(the interface that JdbcTemplate implements).
 
 Spring Boot is designed to load application-level configuration before considering its
 auto-configuration classes
@@ -166,7 +167,7 @@ classpath: URL to reference it.
 	By default, Spring Boot configures logging via Logback
 	if you decide that you’d rather use Log4j or Log4j2, you’ll need to change your dependencies to include the appropriate starter
 for the logging implementation you want to use and to exclude Logback.
-
+```xml
 	<dependency>
 	<groupId>org.springframework.boot</groupId>
 	<artifactId>spring-boot-starter</artifactId>
@@ -182,10 +183,10 @@ for the logging implementation you want to use and to exclude Logback.
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-log4j</artifactId>
 	</dependency>
-
+```
 
 	in src/main/resources
-
+```xml
 	<configuration>
 		<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
 		<encoder>
@@ -199,23 +200,25 @@ for the logging implementation you want to use and to exclude Logback.
 			<appender-ref ref="STDOUT" />
 		</root>
 		</configuration>
+```
 
 properties can be set in application.properties like this:
+```properties
 	logging.path=/var/logs/
 	logging.file=BookWorm.log
 	logging.level.root=WARN
 	logging.level.root.org.springframework.security=DEBUG
 	config.classpath=logging-config.xml
-
+```
 	### CONFIGURING A DATA SOURCE
-
+```yaml
 	spring:
 		datasource:
 			url: jdbc:mysql://localhost/readinglist
 			username: dbuser
 			password: dbpass
 			driver-class-name: com.mysql.jdbc.Driver  // optional springboot can detect that from URL
-
+```
 	Spring Boot will use this connection data when auto-configuring the DataSource
 bean. The DataSource bean will be pooled, using Tomcat’s pooling DataSource if it’s available on the classpath. 
 If not, it will look for and use one of these other connection
@@ -242,16 +245,16 @@ properties (if set) will be ignored.
 public class ReadingListController {...}
 
 	Instead you should use a separate bean for domain configuration properties, and inject this bean in ReadingListController
-
-		@Component
+```java
+	@Component
 	@ConfigurationProperties("amazon")
 	public class AmazonProperties {...
 
-		@Autowired
+	@Autowired
 	public ReadingListController(
 	ReadingListRepository readingListRepository,
 	AmazonProperties amazonProperties) { ... }
-
+```
 	property in application.properties:
 		amazon.associateId=habuma-20
 
@@ -262,18 +265,18 @@ public class ReadingListController {...}
 
 	Profilesare a type of conditional configuration where different beans or configuration classes
 are used or ignored based on what profiles are active at runtime. For instance, suppose that the security configuration we created
-
+```java
 		@Profile("production") // securityconfig will be created if a profile is production
 		@Configuration
 		@EnableWebSecurity
 		public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
+```
 		spring.profiles.active=production
 
 ### WORKING WITH PROFILE-SPECIFIC PROPERTIES FILES
 
 		pattern “application-{profile}.properties”. OR “application-{profile}.yml” , but un yaml you can use profile config in one file
-
+```yaml
 		spring:
 			profiles: development
 				logging:
@@ -287,7 +290,7 @@ are used or ignored based on what profiles are active at runtime. For instance, 
 					file: BookWorm.log
 					level:
 					root: WARN
-
+```
 					========================== TESTING WITH SP-B ========================
 
 
@@ -297,12 +300,12 @@ are used or ignored based on what profiles are active at runtime. For instance, 
 responsible for configuring and wiring up the components in your production application,
 then Spring should also be responsible for configuring and wiring up those
 components in your tests.
-
+```java
 		@RunWith(SpringJUnit4ClassRunner.class)
 		@ContextConfiguration(
 		classes=AddressBookConfiguration.class)
 		public class AddressServiceTests { ... }
-
+```
 
 	Spring’s SpringJUnit4ClassRunner helps load a Spring application context in
 JUnit-based application tests (a JUnit class runner that loads a Spring application context
@@ -320,13 +323,14 @@ properties (application.properties or application.yml), and other features of Sp
 Boot. If you’re using @ContextConfiguration, you won’t get those features.
 To get those features back in your integration tests, you can swap out @Context-
 Configuration for Spring Boot’s @SpringApplicationConfiguration
-
+```java
 		@RunWith(SpringJUnit4ClassRunner.class)
 		@SpringApplicationConfiguration(
 		classes=AddressBookConfiguration.class)
 		public class AddressServiceTests {
 		...
 		}
+```
 
 		NB : @SpringApplicationConfiguration
 loads the Spring application context using SpringApplication the same way
@@ -348,8 +352,7 @@ This includes the loading of external properties and Spring Boot logging.
 
 
 ### 4.2.1 Mocking Spring MVC
-
-
+```java
 			mockMvc.perform(post("/readingList")
 				.contentType(MediaType.APPLICATION_FORM_URLENCODED)
 				.param("title", "BOOK TITLE")
@@ -358,6 +361,7 @@ This includes the loading of external properties and Spring Boot logging.
 				.param("description", "DESCRIPTION"))
 				.andExpect(status().is3xxRedirection())
 				.andExpect(header().string("Location", "/readingList"));
+```
 
 ### 4.3 Testing a running application
 				
@@ -368,7 +372,7 @@ This includes the loading of external properties and Spring Boot logging.
 		First we’ll need to inject the chosen port as an instance variable. To make this convenient,
 Spring Boot sets a property with the name local.server.port to the value of
 the chosen port.
-
+```java
 
 				@RunWith(SpringJUnit4ClassRunner.class)
 				@SpringApplicationConfiguration(
@@ -391,9 +395,10 @@ the chosen port.
 						}
 					}
 				}
+```
 ### 4.3.2 Testing HTML pages with Selenium
 		Add dependecy : testCompile("org.seleniumhq.selenium:selenium-java:2.45.0")
-
+```java
 		@RunWith(SpringJUnit4ClassRunner.class)
 		@SpringApplicationConfiguration(
 		classes=ReadingListApplication.class)
@@ -436,7 +441,7 @@ the chosen port.
 				browser.findElementByCssSelector("dd.bookDescription");
 				assertEquals("DESCRIPTION", dt.getText());
 			}..}
-
+```
 ### Spring Boot Developer Tools
 
 	■ Automatic restart—Restarts a running application when files are changed in
@@ -498,14 +503,14 @@ the chosen port.
 		some configuration properties
 
 		Add Deps : 
-
+```xml
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 		</dependency>
-
+```
   when the developer tools are active, the following properties are set to false:
-  
+
 			■ spring.thymeleaf.cache
 			■ spring.freemarker.cache
 			■ spring.velocity.cache
@@ -513,6 +518,7 @@ the chosen port.
 			■ spring.groovy.template.cache
 
 ### Globally configuring developer tools
+
 
 	Create a file named .spring-boot-devtools.properties in your home directory and add to it setting ...
 			spring.devtools.restart.trigger-file=.trigger
