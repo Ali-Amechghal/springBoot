@@ -1,4 +1,4 @@
-# springBoot
+# Spring Boot
 Spring Boot Notes , Tips &amp; Tricks
 
 
@@ -49,7 +49,7 @@ Spring Boot Notes , Tips &amp; Tricks
 
     	==> Conditionl
     		Creating a condition class:
-    ```java	
+```java	
     	public class JdbcTemplateCondition implements Condition {
     		@Override
     		public boolean matches (ConditionContext ctxt, AnnotatedTypeMetaData m){
@@ -62,10 +62,11 @@ Spring Boot Notes , Tips &amp; Tricks
     		}
 
     	}
-    ```
+```
     		Using a condition :
+              Create MySerice only if JdbcTemplate its present in the classpath
 ```java
-    	Create MySerice only if JdbcTemplate its present in the classpath
+
     	@Conditional(JdbcTemplateCondition.class)
     	public MyService myService(){
     		...
@@ -96,7 +97,7 @@ interface that JdbcTemplate implements).
 Spring Boot is designed to load application-level configuration before considering its
 auto-configuration classes
 
-3.2 Externalizing configuration with properties
+ ## Externalizing configuration with properties
 
 	When you need to adjust the settings, you can specify
 these properties via environment variables, Java system properties, JNDI, commandline
@@ -159,7 +160,7 @@ classpath: URL to reference it.
 		key-store-password: letmein
 		key-password: letmein
 
-	==> CONFIGURING LOGGING
+	### CONFIGURING LOGGING
 
 	By default, Spring Boot configures logging via Logback
 	if you decide that you’d rather use Log4j or Log4j2, you’ll need to change your dependencies to include the appropriate starter
@@ -205,7 +206,7 @@ properties can be set in application.properties like this:
 	logging.level.root.org.springframework.security=DEBUG
 	config.classpath=logging-config.xml
 
-	==> CONFIGURING A DATA SOURCE
+	### CONFIGURING A DATA SOURCE
 
 	spring:
 		datasource:
@@ -217,7 +218,9 @@ properties can be set in application.properties like this:
 	Spring Boot will use this connection data when auto-configuring the DataSource
 bean. The DataSource bean will be pooled, using Tomcat’s pooling DataSource if it’s available on the classpath. 
 If not, it will look for and use one of these other connection
+
 pool implementations on the classpath:
+
 	■ HikariCP
 	■ Commons DBCP
 	■ Commons DBCP 2
@@ -231,7 +234,7 @@ You may also choose to look up the DataSource from JNDI by setting the spring.da
 	NB : If you set the spring.datasource.jndi-name property, the other datasource connection
 properties (if set) will be ignored.
 
-		==> 3.2.2 Externally configuring application beans
+		### 3.2.2 Externally configuring application beans
 
 		@ConfigurationProperties(prefix="amazon") 
 		//sepecify that the bean properties should be injected from config prperties file
