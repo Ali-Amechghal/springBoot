@@ -505,11 +505,17 @@ the chosen port.
 		</dependency>
 
   when the developer tools are active, the following properties are set to false:
+
 			■ spring.thymeleaf.cache
+
 			■ spring.freemarker.cache
+
 			■ spring.velocity.cache
+
 			■ spring.mustache.cache
+
 			■ spring.groovy.template.cache
+			
 
 ### Globally configuring developer tools
 
