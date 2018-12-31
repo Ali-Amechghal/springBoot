@@ -441,7 +441,7 @@ the chosen port.
 				browser.findElementByCssSelector("dd.bookDescription");
 				assertEquals("DESCRIPTION", dt.getText());
 			}..}
-```
+``
 ### Spring Boot Developer Tools
 
 	■ Automatic restart—Restarts a running application when files are changed in
@@ -452,7 +452,7 @@ the chosen port.
 			(such as those in third-party JAR files) will be loaded into a base classloader, whereas
 			application code that is being worked on will be loaded into a separate restart classloader.
 			When changes are detected, only the restart classloader is restarted.
-
+```yaml
 			spring:
 			  devtools:
 				restart:
@@ -468,6 +468,7 @@ the chosen port.
 				devtools:
 					restart:
 						trigger-file: .trigger
+```
 
 	■ LiveReload support—Changes to resources trigger a browser refresh
 		automatically
@@ -477,12 +478,12 @@ the chosen port.
 
 	■ Remote development—Supports automatic restart and LiveReload when
 		deployed remotely
-
+```yaml
 		spring:
 			devtools:
 				remote:
 					secret: myappsecret
-
+```
 		1 Select the Run > Run Configurations menu item.
 		2 Create a new Java Application launch configuration.
 		3 Select the Reading List project in the Project field (either by typing the project
@@ -525,7 +526,7 @@ the chosen port.
 			spring.devtools.livereload.enabled=false
 
 ### Taking a peek inside with the Actuator
-
+```xml
 	<dependency>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-actuator</artifactId>
@@ -536,3 +537,6 @@ the chosen port.
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-remote-shell</artifactId>
 	</dependency>
+```
+
+@CopyRights Ali-Amechghal
